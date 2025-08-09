@@ -49,7 +49,7 @@ describe('Valida tela de login', () => {
       cy.login(user)
       // Valida se o usuário foi redirecionado para a página de produtos
       // e se o título da página está correto
-      cy.get('.title')
+      cy.get('.title'
         .should('be.visible')
         .should('have.text', 'Products')
       cy.url()

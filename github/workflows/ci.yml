@@ -4,6 +4,12 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    env:    # aqui
+      USER_STANDARD_USERNAME: ${{ secrets.USER_STANDARD_USERNAME }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
+      USER_PERFORMANCE_USERNAME: ${{ secrets.USER_PERFORMANCE_USERNAME }}
+      USER_PROBLEM_USERNAME: ${{ secrets.USER_PROBLEM_USERNAME }}
 
     steps:
       - name: Checkout repository
@@ -23,9 +29,3 @@ jobs:
           browser: chrome
           headless: true
           command: npm run test:cloud
-      env:
-        USER_STANDARD_USERNAME: ${{ secrets.USER_STANDARD_USERNAME }}
-        USER_PASSWORD: ${{ secrets.USER_STANDARD_PASSWORD }}
-        USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
-        USER_PERFORMANCE_USERNAME: ${{ secrets.USER_PERFORMANCE_USERNAME }}
-        USER_PROBLEM_USERNAME: ${{ secrets.USER_PROBLEM_USERNAME }}
