@@ -45,7 +45,7 @@ describe('Valida tela de login', () => {
   })
   const users = ['standard','problem', 'performance']
   users.forEach((user) => {
-    it.only(`Deve permitir login com diversos usuarios ${user}`, () => {
+    it(`Deve permitir login com diversos usuarios ${user}`, () => {
       cy.login(user)
       // Valida se o usuário foi redirecionado para a página de produtos
       // e se o título da página está correto
