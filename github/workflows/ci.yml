@@ -1,0 +1,39 @@
+name: End-to-End Tests
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          headless: true
+          command: npm run test:cloud
+      env:
+        USER_STANDARD_USERNAME: ${{ secrets.USER_STANDARD_USERNAME }}
+        USER_PASSWORD: ${{ secrets.USER_STANDARD_PASSWORD }}
+        USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
+        USER_PERFORMANCE_USERNAME: ${{ secrets.USER_PERFORMANCE_USERNAME }}

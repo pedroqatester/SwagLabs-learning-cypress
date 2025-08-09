@@ -10,20 +10,23 @@ describe('Valida tela de login', () => {
     .should('eq', 'Swag Labs')
   })
   it('Deve validar campos obrigatórios', () => {
-  loginPages.loginButton()
-    .should('be.visible')
-    .click()
+  loginPages.submit()
+   
   loginPages.errorMessage()
     .should('be.visible')
     .and('contain', messages.usernameRequired)
   })
+
   it('Deve validar campo obrigatório em Password', () => {
-  loginPages.fillUsername('standard_user')
+  const user = Cypress.env('USERS').standard
+  
+  loginPages.fillUsername(user.username)
   loginPages.submit()
   loginPages.errorMessage()
     .should('be.visible')
     .and('contain', messages.passwordRequired)
   })
+
   it('Não deve permitir login com credenciais inválidas', () => {
   loginPages.login('invalid_user', 'invalid_password')
   loginPages.errorMessage()
@@ -31,7 +34,8 @@ describe('Valida tela de login', () => {
     .and('contain', messages.invalidCredentials)
   })
   it('Deve permitir login com usuario standard_user', () => {
-    loginPages.login('standard_user', 'secret_sauce')
+    cy.login('standard')
+
     // Valida se o usuário foi redirecionado para a página de produtos
     cy.get('.title')
       .should('be.visible')
@@ -53,7 +57,7 @@ describe('Valida tela de login', () => {
     })
   })
   it('Não deve permitir login de usuário bloqueado', () => {
-    loginPages.login('locked_out_user', 'secret_sauce')
+    cy.login('locked')
     loginPages.errorMessage()
       .should('be.visible')
       .and('contain', messages.userLocked)
@@ -68,7 +72,7 @@ describe('Valida tela de login', () => {
     cy.then(() => {
       inicio = performance.now()
     })
-    loginPages.login('performance_glitch_user', 'secret_sauce')
+    cy.login('performance')
 
     cy.get('.title', { timeout: 10000 }).should('have.text', 'Products')
     .then(() => {
@@ -80,4 +84,4 @@ describe('Valida tela de login', () => {
       expect(duracao).to.be.lessThan(tempoMaximoMS)
     })
   })
-})
+  })
