@@ -43,10 +43,10 @@ describe('Valida tela de login', () => {
     cy.url()
       .should('include', '/inventory.html')
   })
-  const users = ['standard_user', 'problem_user', 'performance_glitch_user']
+  const users = ['standard','problem', 'performance']
   users.forEach((user) => {
-    it(`Deve permitir login com diversos usuarios ${user}`, () => {
-      loginPages.login(user, 'secret_sauce')
+    it.only(`Deve permitir login com diversos usuarios ${user}`, () => {
+      cy.login(user)
       // Valida se o usuário foi redirecionado para a página de produtos
       // e se o título da página está correto
       cy.get('.title')
