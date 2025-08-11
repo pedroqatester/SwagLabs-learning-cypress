@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     env:    
       CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      USERS: ${{ secrets.USERS }}
       USER_STANDARD_USERNAME: ${{ secrets.USER_STANDARD_USERNAME }}
       USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
       USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
