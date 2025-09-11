@@ -9,23 +9,6 @@ describe('Valida tela de login', () => {
     cy.title()
     .should('eq', 'Swag Labs')
   })
-  it('Deve validar campos obrigatórios', () => {
-  loginPages.submit()
-   
-  loginPages.errorMessage()
-    .should('be.visible')
-    .and('contain', messages.usernameRequired)
-  })
-
-  it('Deve validar campo obrigatório em Password', () => {
-  const user = Cypress.env('USERS').standard
-  
-  loginPages.fillUsername(user.username)
-  loginPages.submit()
-  loginPages.errorMessage()
-    .should('be.visible')
-    .and('contain', messages.passwordRequired)
-  })
 
   it('Não deve permitir login com credenciais inválidas', () => {
   loginPages.login('invalid_user', 'invalid_password')
@@ -81,6 +64,26 @@ describe('Valida tela de login', () => {
       cy.log(`Duração do login: ${duracao.toFixed(0)} ms`)
       expect(duracao).to.be.greaterThan(tempoMinimoMs)
       expect(duracao).to.be.lessThan(tempoMaximoMS)
+    })
+  })
+
+  describe('Validações de campos obrigatórios', () => {
+  it('Deve validar campos obrigatórios', () => {
+    loginPages.submit()
+     
+    loginPages.errorMessage()
+      .should('be.visible')
+      .and('contain', messages.usernameRequired)
+    })
+  
+    it('Deve validar campo obrigatório em Password', () => {
+    const user = Cypress.env('USERS').standard
+    
+    loginPages.fillUsername(user.username)
+    loginPages.submit()
+    loginPages.errorMessage()
+      .should('be.visible')
+      .and('contain', messages.passwordRequired)
     })
   })
   })
