@@ -38,4 +38,29 @@ describe('Valida tela de products', () => {
         productsPages.sortDropdown.select('Price (high to low)')
         validateSortOrder('high to low')
     })
+
+describe('Valida adição de produtos ao carrinho', () => {
+  
+  it('Deve adicionar um produto ao carrinho', () => {
+    productsPages.AddItemToCart(2)
+    productsPages.cartBadge
+      .should('be.visible')
+      .and('have.text', '1')
+    productsPages.cartLink.click()
+    cy.url().should('include', '/cart.html')
+    cy.get('.cart_item').should('have.length', 1)
+  })
+
+  it('Deve adicionar vários produtos ao carrinho', () => {
+    productsPages.AddItemToCart(0)
+    productsPages.AddItemToCart(1)
+    productsPages.AddItemToCart(2)
+    productsPages.cartBadge
+      .should('be.visible')
+      .and('have.text', '3')
+    productsPages.cartLink.click()
+    cy.url().should('include', '/cart.html')
+    cy.get('.cart_item').should('have.length', 3)
+  })
+})
 })
