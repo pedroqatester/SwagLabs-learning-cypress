@@ -38,8 +38,5 @@ class ProductsPage {
     sortProducsts(option) {
         this.sortDropdown.select(option)
     }
-    AddProductsToCart(index) {
-        cy.get('.inventory_item').eq(index).find('.btn_inventory').click()
-    }
 }
 export default new ProductsPage()
