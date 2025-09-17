@@ -26,6 +26,13 @@ class ProductsPage {
     get itemDetailsPrice() {
         return cy.get('.inventory_details_price')
     }
+    get addedToCartButton() {
+        return cy.get('.btn_inventory').contains('Remove')
+    }
+    get addToCartButton() {
+        return cy.get('#add-to-cart').contains('Add to cart')
+    }
+
     openSideMenu() {
         this.burgerMenuButton.click()
     }

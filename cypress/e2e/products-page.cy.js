@@ -30,8 +30,8 @@ describe('Valida tela de products', () => {
         productsPages.cartBadge
           .should('be.visible')
           .and('have.text', '1')
-        cy.get('#remove').click()
+        productsPages.addedToCartButton.click()
+        productsPages.addToCartButton
         productsPages.cartBadge.should('not.exist')
-
     })    
 })
