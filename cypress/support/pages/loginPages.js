@@ -19,7 +19,6 @@ class LoginPage {
       return cy.get('[data-test="error"]')
     }
   
-    // Ações (métodos)
     fillUsername(user) {
       this.usernameField().clear().type(user)
     }
@@ -32,7 +31,6 @@ class LoginPage {
       this.loginButton().click()
     }
   
-    // método pronto para usar no teste
     login(user, pass) {
       this.fillUsername(user)
       this.fillPassword(pass)

@@ -23,6 +23,9 @@ class ProductsPage {
     get cartBadge() {
         return cy.get('.shopping_cart_badge')
     }
+    get itemDetailsPrice() {
+        return cy.get('.inventory_details_price')
+    }
     openSideMenu() {
         this.burgerMenuButton.click()
     }
@@ -37,6 +40,12 @@ class ProductsPage {
     }
     sortProducsts(option) {
         this.sortDropdown.select(option)
+    }
+    ViewProductDetails(index) {
+        cy.get('.inventory_item').eq(index).find('.inventory_item_name').click()
+    }
+    AddItemToCartFromDetails() {
+        cy.get('.btn_inventory').click()
     }
 }
 export default new ProductsPage()

@@ -1,5 +1,4 @@
 import loginPages from '../support/pages/loginPages'
-import messages from '../support/pages/messages'
 import productsPages from '../support/pages/productsPages'
 import { validateSortOrder } from '../support/utils'
 
@@ -83,6 +82,10 @@ describe('Valida adição de produtos ao carrinho', () => {
       cy.get('.cart_item').find('button').click()
       cy.get('.cart_item').should('not.exist')
       productsPages.cartBadge.should('not.exist')
+
+    // volta para a tela de produtos
+      cy.get('#continue-shopping').click()
+      cy.url().should('include', '/inventory.html')
   })    
 })
 
